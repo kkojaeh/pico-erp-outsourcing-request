@@ -1,0 +1,13 @@
+data:
+  outsourcing-requests:
+  - id: outsourcing-request-1
+    item-id: toothbrush-06
+    item-spec-code: MP
+    quantity: 1000
+    spare-quantity: 50
+    process-id: toothbrush-061
+    project-id: sample-project1
+    receiver-id: CUST1
+    requester-id: kjh
+    due-date: "2020-12-20T09:44:03+09:00"
+    remark: 비고 내용
