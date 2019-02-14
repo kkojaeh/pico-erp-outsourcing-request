@@ -15,7 +15,6 @@ import pico.erp.item.spec.ItemSpecService;
 import pico.erp.outsourcing.request.OutsourcingRequestEvents;
 import pico.erp.outsourcing.request.OutsourcingRequestService;
 import pico.erp.process.ProcessService;
-import pico.erp.process.type.ProcessTypeEvents.CostChangedEvent;
 
 @SuppressWarnings("unused")
 @Component
@@ -49,7 +48,7 @@ public class OutsourcingRequestMaterialEventListener {
 
   @EventListener
   @JmsListener(destination = LISTENER_NAME + "."
-    + CostChangedEvent.CHANNEL)
+    + OutsourcingRequestEvents.CreatedEvent.CHANNEL)
   public void onRequestCreated(OutsourcingRequestEvents.CreatedEvent event) {
     val request = outsourcingRequestService.get(event.getId());
     val processes = processService.getAll(request.getItemId());
