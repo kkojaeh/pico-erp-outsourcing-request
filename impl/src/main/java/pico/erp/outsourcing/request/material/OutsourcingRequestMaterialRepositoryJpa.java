@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pico.erp.outsourcing.request.OutsourcingRequestId;
 
 @Repository
-interface OutsourcingRequestItemEntityRepository extends
+interface OutsourcingRequestMaterialEntityRepository extends
   CrudRepository<OutsourcingRequestMaterialEntity, OutsourcingRequestMaterialId> {
 
   @Query("SELECT m FROM OutsourcingRequestMaterial m WHERE m.requestId = :requestId ORDER BY m.createdDate")
@@ -26,7 +26,7 @@ public class OutsourcingRequestMaterialRepositoryJpa implements
   OutsourcingRequestMaterialRepository {
 
   @Autowired
-  private OutsourcingRequestItemEntityRepository repository;
+  private OutsourcingRequestMaterialEntityRepository repository;
 
   @Autowired
   private OutsourcingRequestMaterialMapper mapper;
