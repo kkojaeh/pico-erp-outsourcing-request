@@ -107,7 +107,8 @@ public class OutsourcingRequestQueryJpa implements OutsourcingRequestQuery {
   }
 
   @Override
-  public Page<OutsourcingRequestAwaitOrderView> retrieve(OutsourcingRequestAwaitOrderView.Filter filter,
+  public Page<OutsourcingRequestAwaitOrderView> retrieve(
+    OutsourcingRequestAwaitOrderView.Filter filter,
     Pageable pageable) {
     val query = new JPAQuery<OutsourcingRequestAwaitOrderView>(entityManager);
     val select = Projections.bean(OutsourcingRequestAwaitOrderView.class,
@@ -166,7 +167,8 @@ public class OutsourcingRequestQueryJpa implements OutsourcingRequestQuery {
   }
 
   @Override
-  public Page<OutsourcingRequestAwaitAcceptView> retrieve(OutsourcingRequestAwaitAcceptView.Filter filter,
+  public Page<OutsourcingRequestAwaitAcceptView> retrieve(
+    OutsourcingRequestAwaitAcceptView.Filter filter,
     Pageable pageable) {
     val query = new JPAQuery<OutsourcingRequestAwaitAcceptView>(entityManager);
     val select = Projections.bean(OutsourcingRequestAwaitAcceptView.class,

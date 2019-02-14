@@ -16,8 +16,8 @@ public interface OutsourcingRequestMaterialService {
 
   OutsourcingRequestMaterialData get(@Valid @NotNull OutsourcingRequestMaterialId id);
 
-  void update(@Valid @NotNull OutsourcingRequestMaterialRequests.UpdateRequest request);
-
   List<OutsourcingRequestMaterialData> getAll(@Valid @NotNull OutsourcingRequestId requestId);
+
+  void update(@Valid @NotNull OutsourcingRequestMaterialRequests.UpdateRequest request);
 
 }

@@ -5,9 +5,6 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import javax.persistence.Id;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,18 +13,13 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import pico.erp.audit.annotation.Audit;
-import pico.erp.company.CompanyData;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.ProcessId;
-import pico.erp.project.ProjectData;
 import pico.erp.project.ProjectId;
-import pico.erp.user.UserData;
 import pico.erp.user.UserId;
-import pico.erp.warehouse.location.site.SiteData;
 import pico.erp.warehouse.location.site.SiteId;
-import pico.erp.warehouse.location.station.StationData;
 import pico.erp.warehouse.location.station.StationId;
 
 /**
@@ -233,17 +225,28 @@ public class OutsourcingRequest implements Serializable {
     );
   }
 
+  public boolean isAcceptable() {
+    return status.isAcceptable();
+  }
 
   public boolean isCancelable() {
     return status.isCancelable();
+  }
+
+  public boolean isCommittable() {
+    return status.isCommittable();
   }
 
   public boolean isCompletable() {
     return status.isCompletable();
   }
 
-  public boolean isAcceptable() {
-    return status.isAcceptable();
+  public boolean isPlannable() {
+    return status.isPlannable();
+  }
+
+  public boolean isProgressCancelable() {
+    return status.isProgressCancelable();
   }
 
   public boolean isProgressable() {
@@ -254,20 +257,8 @@ public class OutsourcingRequest implements Serializable {
     return status.isRejectable();
   }
 
-  public boolean isCommittable() {
-    return status.isCommittable();
-  }
-
   public boolean isUpdatable() {
     return status.isUpdatable();
-  }
-
-  public boolean isProgressCancelable() {
-    return status.isProgressCancelable();
-  }
-
-  public boolean isPlannable() {
-    return status.isPlannable();
   }
 
 

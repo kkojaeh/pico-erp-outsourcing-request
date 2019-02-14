@@ -9,15 +9,12 @@ public interface OutsourcingRequestQuery {
   Page<OutsourcingRequestView> retrieve(@NotNull OutsourcingRequestView.Filter filter,
     @NotNull Pageable pageable);
 
-  Page<OutsourcingRequestAwaitOrderView> retrieve(@NotNull OutsourcingRequestAwaitOrderView.Filter filter,
+  Page<OutsourcingRequestAwaitOrderView> retrieve(
+    @NotNull OutsourcingRequestAwaitOrderView.Filter filter,
     @NotNull Pageable pageable);
 
   Page<OutsourcingRequestAwaitAcceptView> retrieve(
     @NotNull OutsourcingRequestAwaitAcceptView.Filter filter, @NotNull Pageable pageable);
-
-
-
-
 
 
 }

@@ -2,11 +2,9 @@ package pico.erp.outsourcing.request;
 
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import pico.erp.audit.AuditService;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.AcceptRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.CancelProgressRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.CancelRequest;
@@ -35,7 +33,43 @@ public class OutsourcingRequestServiceLogic implements OutsourcingRequestService
   private OutsourcingRequestMapper mapper;
 
   @Override
+  public void accept(AcceptRequest request) {
+    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
+      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
+    val response = outsourcingRequest.apply(mapper.map(request));
+    outsourcingRequestRepository.update(outsourcingRequest);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
   public void cancel(CancelRequest request) {
+    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
+      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
+    val response = outsourcingRequest.apply(mapper.map(request));
+    outsourcingRequestRepository.update(outsourcingRequest);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void cancelProgress(CancelProgressRequest request) {
+    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
+      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
+    val response = outsourcingRequest.apply(mapper.map(request));
+    outsourcingRequestRepository.update(outsourcingRequest);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void commit(CommitRequest request) {
+    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
+      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
+    val response = outsourcingRequest.apply(mapper.map(request));
+    outsourcingRequestRepository.update(outsourcingRequest);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void complete(CompleteRequest request) {
     val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
       .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
     val response = outsourcingRequest.apply(mapper.map(request));
@@ -68,43 +102,7 @@ public class OutsourcingRequestServiceLogic implements OutsourcingRequestService
   }
 
   @Override
-  public void update(OutsourcingRequestRequests.UpdateRequest request) {
-    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
-      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
-    val response = outsourcingRequest.apply(mapper.map(request));
-    outsourcingRequestRepository.update(outsourcingRequest);
-    eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public void accept(AcceptRequest request) {
-    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
-      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
-    val response = outsourcingRequest.apply(mapper.map(request));
-    outsourcingRequestRepository.update(outsourcingRequest);
-    eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public void commit(CommitRequest request) {
-    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
-      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
-    val response = outsourcingRequest.apply(mapper.map(request));
-    outsourcingRequestRepository.update(outsourcingRequest);
-    eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public void complete(CompleteRequest request) {
-    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
-      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
-    val response = outsourcingRequest.apply(mapper.map(request));
-    outsourcingRequestRepository.update(outsourcingRequest);
-    eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public void reject(RejectRequest request) {
+  public void plan(PlanRequest request) {
     val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
       .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
     val response = outsourcingRequest.apply(mapper.map(request));
@@ -122,7 +120,7 @@ public class OutsourcingRequestServiceLogic implements OutsourcingRequestService
   }
 
   @Override
-  public void plan(PlanRequest request) {
+  public void reject(RejectRequest request) {
     val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
       .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
     val response = outsourcingRequest.apply(mapper.map(request));
@@ -131,7 +129,7 @@ public class OutsourcingRequestServiceLogic implements OutsourcingRequestService
   }
 
   @Override
-  public void cancelProgress(CancelProgressRequest request) {
+  public void update(OutsourcingRequestRequests.UpdateRequest request) {
     val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
       .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
     val response = outsourcingRequest.apply(mapper.map(request));

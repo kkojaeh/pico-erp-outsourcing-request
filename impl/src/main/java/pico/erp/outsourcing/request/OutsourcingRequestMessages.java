@@ -10,20 +10,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import pico.erp.company.CompanyData;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.ProcessId;
-import pico.erp.project.ProjectData;
 import pico.erp.project.ProjectId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
-import pico.erp.user.UserData;
 import pico.erp.user.UserId;
-import pico.erp.warehouse.location.site.SiteData;
 import pico.erp.warehouse.location.site.SiteId;
-import pico.erp.warehouse.location.station.StationData;
 import pico.erp.warehouse.location.station.StationId;
 
 public interface OutsourcingRequestMessages {

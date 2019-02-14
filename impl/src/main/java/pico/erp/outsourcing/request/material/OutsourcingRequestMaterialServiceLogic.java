@@ -19,7 +19,7 @@ import pico.erp.shared.event.EventPublisher;
 @Public
 @Transactional
 @Validated
-public class OutsourcingRequestMaterialServiceLogic implements OutsourcingRequestMaterialService{
+public class OutsourcingRequestMaterialServiceLogic implements OutsourcingRequestMaterialService {
 
   @Autowired
   private OutsourcingRequestMaterialRepository outsourcingRequestMaterialRepository;
@@ -64,19 +64,19 @@ public class OutsourcingRequestMaterialServiceLogic implements OutsourcingReques
   }
 
   @Override
+  public List<OutsourcingRequestMaterialData> getAll(OutsourcingRequestId requestId) {
+    return outsourcingRequestMaterialRepository.findAllBy(requestId)
+      .map(mapper::map)
+      .collect(Collectors.toList());
+  }
+
+  @Override
   public void update(UpdateRequest request) {
     val material = outsourcingRequestMaterialRepository.findBy(request.getId())
       .orElseThrow(OutsourcingRequestMaterialExceptions.NotFoundException::new);
     val response = material.apply(mapper.map(request));
     outsourcingRequestMaterialRepository.update(material);
     eventPublisher.publishEvents(response.getEvents());
-  }
-
-  @Override
-  public List<OutsourcingRequestMaterialData> getAll(OutsourcingRequestId requestId) {
-    return outsourcingRequestMaterialRepository.findAllBy(requestId)
-      .map(mapper::map)
-      .collect(Collectors.toList());
   }
 
 }

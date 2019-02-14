@@ -16,7 +16,8 @@ interface OutsourcingRequestMaterialEntityRepository extends
   CrudRepository<OutsourcingRequestMaterialEntity, OutsourcingRequestMaterialId> {
 
   @Query("SELECT m FROM OutsourcingRequestMaterial m WHERE m.requestId = :requestId ORDER BY m.createdDate")
-  Stream<OutsourcingRequestMaterialEntity> findAllBy(@Param("requestId") OutsourcingRequestId planId);
+  Stream<OutsourcingRequestMaterialEntity> findAllBy(
+    @Param("requestId") OutsourcingRequestId planId);
 
 }
 

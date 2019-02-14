@@ -9,12 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import pico.erp.audit.AuditApi;
-import pico.erp.audit.AuditConfiguration;
 import pico.erp.bom.BomApi;
 import pico.erp.item.ItemApi;
+import pico.erp.outsourcing.request.OutsourcingRequestApi.Roles;
 import pico.erp.process.ProcessApi;
 import pico.erp.project.ProjectApi;
-import pico.erp.outsourcing.request.OutsourcingRequestApi.Roles;
 import pico.erp.shared.ApplicationId;
 import pico.erp.shared.ApplicationStarter;
 import pico.erp.shared.Public;
@@ -72,8 +71,8 @@ public class OutsourcingRequestApplication implements ApplicationStarter {
 
   @Bean
   @Public
-  public Role outsourcingRequester() {
-    return Roles.OUTSOURCING_REQUESTER;
+  public Role outsourcingRequestAccepter() {
+    return Roles.OUTSOURCING_REQUEST_ACCEPTER;
   }
 
   @Bean
@@ -84,8 +83,8 @@ public class OutsourcingRequestApplication implements ApplicationStarter {
 
   @Bean
   @Public
-  public Role outsourcingRequestAccepter() {
-    return Roles.OUTSOURCING_REQUEST_ACCEPTER;
+  public Role outsourcingRequester() {
+    return Roles.OUTSOURCING_REQUESTER;
   }
 
   @Override
