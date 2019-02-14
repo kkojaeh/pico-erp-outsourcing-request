@@ -22,13 +22,6 @@ public interface OutsourcingRequestMaterialExceptions {
 
     private static final long serialVersionUID = 1L;
   }
-
-  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "outsourcing-request-material.cannot.plan.exception")
-  class CannotPlanException extends RuntimeException {
-
-    private static final long serialVersionUID = 1L;
-  }
-
   @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "outsourcing-request-material.cannot.create.exception")
   class CannotCreateException extends RuntimeException {
 

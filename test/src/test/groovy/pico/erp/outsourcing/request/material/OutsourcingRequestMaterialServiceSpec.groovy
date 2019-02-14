@@ -82,6 +82,14 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     )
   }
 
+  def planRequest() {
+    requestService.plan(
+      new OutsourcingRequestRequests.PlanRequest(
+        id: requestId
+      )
+    )
+  }
+
   def completeRequest() {
     requestService.complete(
       new OutsourcingRequestRequests.CompleteRequest(
@@ -215,6 +223,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     createMaterial()
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     createMaterial2()
     then:
@@ -246,6 +255,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     createMaterial()
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     createMaterial2()
@@ -287,6 +297,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     createMaterial()
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     updateMaterial()
     then:
@@ -318,6 +329,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     createMaterial()
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     updateMaterial()
@@ -361,6 +373,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     createMaterial()
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     deleteMaterial()
     then:
@@ -392,6 +405,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     createMaterial()
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     deleteMaterial()

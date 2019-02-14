@@ -53,6 +53,18 @@ public interface OutsourcingRequestExceptions {
     private static final long serialVersionUID = 1L;
   }
 
+  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "outsourcing-request.cannot.plan.exception")
+  class CannotPlanException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+  }
+
+  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "outsourcing-request.cannot.cancel-progress.exception")
+  class CannotCancelProgressException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+  }
+
   @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "outsourcing-request.not.found.exception")
   class NotFoundException extends RuntimeException {
 

@@ -247,5 +247,37 @@ public interface OutsourcingRequestMessages {
 
   }
 
+  interface Plan {
+
+    @Data
+    class Request {
+
+    }
+
+    @Value
+    class Response {
+
+      Collection<Event> events;
+
+    }
+
+  }
+
+  interface CancelProgress {
+
+    @Data
+    class Request {
+
+    }
+
+    @Value
+    class Response {
+
+      Collection<Event> events;
+
+    }
+
+  }
+
 
 }

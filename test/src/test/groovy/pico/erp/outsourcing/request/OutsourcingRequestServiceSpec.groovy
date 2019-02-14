@@ -135,6 +135,14 @@ class OutsourcingRequestServiceSpec extends Specification {
     )
   }
 
+  def planRequest() {
+    requestService.plan(
+      new OutsourcingRequestRequests.PlanRequest(
+        id: id
+      )
+    )
+  }
+
   def completeRequest() {
     requestService.complete(
       new OutsourcingRequestRequests.CompleteRequest(
@@ -244,6 +252,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     updateRequest()
@@ -264,6 +273,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     updateRequest()
     then:
@@ -305,6 +315,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     commitRequest()
     then:
@@ -332,6 +343,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     commitRequest()
@@ -368,6 +380,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     acceptRequest()
     then:
@@ -395,6 +408,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     acceptRequest()
@@ -421,6 +435,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     def request = requestService.get(id)
     then:
@@ -431,6 +446,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     progressRequest()
     def request = requestService.get(id)
@@ -459,6 +475,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     progressRequest()
@@ -497,6 +514,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     cancelRequest()
     then:
@@ -516,6 +534,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     cancelRequest()
@@ -553,6 +572,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     rejectRequest()
     then:
@@ -580,6 +600,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     rejectRequest()
@@ -616,6 +637,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     def request = requestService.get(id)
@@ -645,6 +667,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     when:
     commitRequest()
     acceptRequest()
+    planRequest()
     progressRequest()
     completeRequest()
     completeRequest()

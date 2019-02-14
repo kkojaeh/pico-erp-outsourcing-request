@@ -211,6 +211,28 @@ public class OutsourcingRequest implements Serializable {
     );
   }
 
+  public OutsourcingRequestMessages.Plan.Response apply(
+    OutsourcingRequestMessages.Plan.Request request) {
+    if (!this.isPlannable()) {
+      throw new OutsourcingRequestExceptions.CannotPlanException();
+    }
+    this.status = OutsourcingRequestStatusKind.IN_PLANNING;
+    return new OutsourcingRequestMessages.Plan.Response(
+      Arrays.asList(new OutsourcingRequestEvents.PlannedEvent(this.id))
+    );
+  }
+
+  public OutsourcingRequestMessages.CancelProgress.Response apply(
+    OutsourcingRequestMessages.CancelProgress.Request request) {
+    if (!this.isProgressCancelable()) {
+      throw new OutsourcingRequestExceptions.CannotCancelProgressException();
+    }
+    this.status = OutsourcingRequestStatusKind.ACCEPTED;
+    return new OutsourcingRequestMessages.CancelProgress.Response(
+      Arrays.asList(new OutsourcingRequestEvents.ProgressCanceledEvent(this.id))
+    );
+  }
+
 
   public boolean isCancelable() {
     return status.isCancelable();
@@ -238,6 +260,14 @@ public class OutsourcingRequest implements Serializable {
 
   public boolean isUpdatable() {
     return status.isUpdatable();
+  }
+
+  public boolean isProgressCancelable() {
+    return status.isProgressCancelable();
+  }
+
+  public boolean isPlannable() {
+    return status.isPlannable();
   }
 
 

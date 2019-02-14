@@ -211,4 +211,28 @@ public interface OutsourcingRequestRequests {
 
   }
 
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class PlanRequest {
+
+    @Valid
+    @NotNull
+    OutsourcingRequestId id;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class CancelProgressRequest {
+
+    @Valid
+    @NotNull
+    OutsourcingRequestId id;
+
+  }
+
 }

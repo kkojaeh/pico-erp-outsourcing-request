@@ -188,6 +188,12 @@ public abstract class OutsourcingRequestMapper {
   public abstract OutsourcingRequestMessages.Progress.Request map(
     OutsourcingRequestRequests.ProgressRequest request);
 
+  public abstract OutsourcingRequestMessages.Plan.Request map(
+    OutsourcingRequestRequests.PlanRequest request);
+
+  public abstract OutsourcingRequestMessages.CancelProgress.Request map(
+    OutsourcingRequestRequests.CancelProgressRequest request);
+
   public abstract void pass(
     OutsourcingRequestEntity from, @MappingTarget OutsourcingRequestEntity to);
 

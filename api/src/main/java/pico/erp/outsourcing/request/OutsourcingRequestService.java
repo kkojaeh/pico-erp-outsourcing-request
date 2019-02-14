@@ -25,4 +25,8 @@ public interface OutsourcingRequestService {
 
   void progress(@Valid @NotNull OutsourcingRequestRequests.ProgressRequest request);
 
+  void plan(@Valid @NotNull OutsourcingRequestRequests.PlanRequest request);
+
+  void cancelProgress(@Valid @NotNull OutsourcingRequestRequests.CancelProgressRequest request);
+
 }

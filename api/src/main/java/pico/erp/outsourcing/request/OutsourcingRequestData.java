@@ -75,4 +75,8 @@ public class OutsourcingRequestData {
 
   boolean updatable;
 
+  boolean plannable;
+
+  boolean progressCancelable;
+
 }

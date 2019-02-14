@@ -127,5 +127,35 @@ public interface OutsourcingRequestEvents {
 
   }
 
+  @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
+  class PlannedEvent implements Event {
+
+    public final static String CHANNEL = "event.outsourcing-request.planned";
+
+    private OutsourcingRequestId id;
+
+    public String channel() {
+      return CHANNEL;
+    }
+
+  }
+
+  @Data
+  @AllArgsConstructor
+  @NoArgsConstructor
+  class ProgressCanceledEvent implements Event {
+
+    public final static String CHANNEL = "event.outsourcing-request.progress-canceled";
+
+    private OutsourcingRequestId id;
+
+    public String channel() {
+      return CHANNEL;
+    }
+
+  }
+
 
 }

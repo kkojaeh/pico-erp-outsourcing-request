@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.AcceptRequest;
+import pico.erp.outsourcing.request.OutsourcingRequestRequests.CancelProgressRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.CancelRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.CommitRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.CompleteRequest;
+import pico.erp.outsourcing.request.OutsourcingRequestRequests.PlanRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.ProgressRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.RejectRequest;
 import pico.erp.shared.Public;
@@ -112,6 +114,24 @@ public class OutsourcingRequestServiceLogic implements OutsourcingRequestService
 
   @Override
   public void progress(ProgressRequest request) {
+    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
+      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
+    val response = outsourcingRequest.apply(mapper.map(request));
+    outsourcingRequestRepository.update(outsourcingRequest);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void plan(PlanRequest request) {
+    val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
+      .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
+    val response = outsourcingRequest.apply(mapper.map(request));
+    outsourcingRequestRepository.update(outsourcingRequest);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void cancelProgress(CancelProgressRequest request) {
     val outsourcingRequest = outsourcingRequestRepository.findBy(request.getId())
       .orElseThrow(OutsourcingRequestExceptions.NotFoundException::new);
     val response = outsourcingRequest.apply(mapper.map(request));
