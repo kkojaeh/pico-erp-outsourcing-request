@@ -5,6 +5,7 @@ data:
     item-spec-code: MP
     quantity: 1000
     spare-quantity: 50
+    unit: EA
     process-id: toothbrush-061
     project-id: sample-project1
     receiver-id: CUST1

@@ -89,6 +89,7 @@ public abstract class OutsourcingRequestMapper {
       .processId(entity.getProcessId())
       .quantity(entity.getQuantity())
       .spareQuantity(entity.getSpareQuantity())
+      .unit(entity.getUnit())
       .projectId(entity.getProjectId())
       .dueDate(entity.getDueDate())
       .supplierId(entity.getSupplierId())

@@ -13,6 +13,7 @@ import pico.erp.outsourcing.request.OutsourcingRequestId
 import pico.erp.outsourcing.request.OutsourcingRequestRequests
 import pico.erp.outsourcing.request.OutsourcingRequestService
 import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.data.UnitKind
 import pico.erp.user.UserId
 import spock.lang.Specification
 
@@ -43,6 +44,8 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
   def accepterId = UserId.from("kjh")
 
   def itemSpecCode = ItemSpecCode.NOT_APPLICABLE
+
+  def unit = UnitKind.EA
 
   def setup() {
 
@@ -115,6 +118,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
         itemId: itemId,
         itemSpecCode: itemSpecCode,
         quantity: 100,
+        unit: unit,
         remark: "품목 비고"
       )
     )
@@ -128,6 +132,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
         itemId: itemId,
         itemSpecCode: itemSpecCode,
         quantity: 100,
+        unit: unit,
         remark: "품목 비고"
       )
     )
@@ -138,6 +143,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
       new OutsourcingRequestMaterialRequests.UpdateRequest(
         id: id,
         quantity: 200,
+        unit: unit,
         remark: "품목 비고2"
       )
     )
@@ -178,6 +184,7 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
     item.itemId == itemId
     item.requestId == requestId
     item.quantity == 100
+    item.unit == unit
     item.remark == "품목 비고"
 
   }

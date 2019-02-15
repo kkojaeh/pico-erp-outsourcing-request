@@ -16,6 +16,7 @@ import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.outsourcing.request.OutsourcingRequest;
+import pico.erp.shared.data.UnitKind;
 
 /**
  * 주문 접수
@@ -41,6 +42,8 @@ public class OutsourcingRequestMaterial implements Serializable {
 
   BigDecimal quantity;
 
+  UnitKind unit;
+
   String remark;
 
   CompanyId supplierId;
@@ -61,6 +64,7 @@ public class OutsourcingRequestMaterial implements Serializable {
     this.itemId = request.getItemId();
     this.itemSpecCode = request.getItemSpecCode();
     this.quantity = request.getQuantity();
+    this.unit = request.getUnit();
     this.remark = request.getRemark();
     this.supplierId = request.getSupplierId();
     this.estimatedSupplyDate = request.getEstimatedSupplyDate();
@@ -76,6 +80,7 @@ public class OutsourcingRequestMaterial implements Serializable {
       throw new OutsourcingRequestMaterialExceptions.CannotUpdateException();
     }
     this.quantity = request.getQuantity();
+    this.unit = request.getUnit();
     this.remark = request.getRemark();
     this.supplierId = request.getSupplierId();
     this.estimatedSupplyDate = request.getEstimatedSupplyDate();

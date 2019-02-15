@@ -16,6 +16,7 @@ import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.outsourcing.request.OutsourcingRequestId;
 import pico.erp.shared.TypeDefinitions;
+import pico.erp.shared.data.UnitKind;
 
 public interface OutsourcingRequestMaterialRequests {
 
@@ -45,6 +46,9 @@ public interface OutsourcingRequestMaterialRequests {
     @Min(0)
     BigDecimal quantity;
 
+    @NotNull
+    UnitKind unit;
+
     @Size(max = TypeDefinitions.REMARK_LENGTH)
     String remark;
 
@@ -69,6 +73,9 @@ public interface OutsourcingRequestMaterialRequests {
     @NotNull
     @Min(0)
     BigDecimal quantity;
+
+    @NotNull
+    UnitKind unit;
 
     @Size(max = TypeDefinitions.REMARK_LENGTH)
     String remark;

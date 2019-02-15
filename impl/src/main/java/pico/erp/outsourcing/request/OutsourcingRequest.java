@@ -18,6 +18,7 @@ import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.ProcessId;
 import pico.erp.project.ProjectId;
+import pico.erp.shared.data.UnitKind;
 import pico.erp.user.UserId;
 import pico.erp.warehouse.location.site.SiteId;
 import pico.erp.warehouse.location.station.StationId;
@@ -50,6 +51,8 @@ public class OutsourcingRequest implements Serializable {
   BigDecimal quantity;
 
   BigDecimal spareQuantity;
+
+  UnitKind unit;
 
   ProjectId projectId;
 
@@ -96,6 +99,7 @@ public class OutsourcingRequest implements Serializable {
     this.processId = request.getProcessId();
     this.quantity = request.getQuantity();
     this.spareQuantity = request.getSpareQuantity();
+    this.unit = request.getUnit();
     this.projectId = request.getProjectId();
     this.dueDate = request.getDueDate();
     this.supplierId = request.getSupplierId();
@@ -118,6 +122,7 @@ public class OutsourcingRequest implements Serializable {
     }
     this.quantity = request.getQuantity();
     this.spareQuantity = request.getSpareQuantity();
+    this.unit = request.getUnit();
     this.projectId = request.getProjectId();
     this.dueDate = request.getDueDate();
     this.supplierId = request.getSupplierId();

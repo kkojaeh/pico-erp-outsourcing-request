@@ -10,6 +10,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import pico.erp.bom.BomService;
 import pico.erp.bom.material.BomMaterialService;
+import pico.erp.item.ItemService;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.item.spec.ItemSpecService;
 import pico.erp.outsourcing.request.OutsourcingRequestEvents;
@@ -46,11 +47,16 @@ public class OutsourcingRequestMaterialEventListener {
   @Autowired
   private ItemSpecService itemSpecService;
 
+  @Lazy
+  @Autowired
+  private ItemService itemService;
+
   @EventListener
   @JmsListener(destination = LISTENER_NAME + "."
     + OutsourcingRequestEvents.CreatedEvent.CHANNEL)
   public void onRequestCreated(OutsourcingRequestEvents.CreatedEvent event) {
-    val request = outsourcingRequestService.get(event.getId());
+    val requestId = event.getId();
+    val request = outsourcingRequestService.get(requestId);
     val processes = processService.getAll(request.getItemId());
 
     val process = processes.stream().filter(p -> p.getId().equals(request.getProcessId())).findAny()
@@ -64,19 +70,23 @@ public class OutsourcingRequestMaterialEventListener {
         val materials = bomMaterialService.getAll(bom.getId());
         materials.forEach(material -> {
           val itemId = material.getItemId();
+          val item = itemService.get(itemId);
+          val unit = item.getUnit();
           val itemSpecCode = Optional.ofNullable(material.getItemSpecId())
             .map(specId -> itemSpecService.get(specId).getCode())
             .orElse(ItemSpecCode.NOT_APPLICABLE);
           val quantity = material.getQuantity().multiply(request.getQuantity()).multiply(
             BigDecimal.ONE.add(process.getLossRate())
           );
+
           outsourcingRequestMaterialService.create(
             OutsourcingRequestMaterialRequests.CreateRequest.builder()
               .id(OutsourcingRequestMaterialId.generate())
-              .requestId(request.getId())
+              .requestId(requestId)
               .itemId(material.getItemId())
               .itemSpecCode(itemSpecCode)
               .quantity(quantity)
+              .unit(unit)
               .build()
           );
         });
@@ -86,13 +96,18 @@ public class OutsourcingRequestMaterialEventListener {
       val quantity = request.getQuantity().multiply(
         BigDecimal.ONE.add(process.getLossRate())
       );
+      val itemId = request.getItemId();
+      val item = itemService.get(itemId);
+      val itemSpecCode = previous.getItemSpecCode();
+      val unit = item.getUnit();
       outsourcingRequestMaterialService.create(
         OutsourcingRequestMaterialRequests.CreateRequest.builder()
           .id(OutsourcingRequestMaterialId.generate())
-          .requestId(request.getId())
-          .itemId(request.getItemId())
-          .itemSpecCode(previous.getItemSpecCode())
+          .requestId(requestId)
+          .itemId(itemId)
+          .itemSpecCode(itemSpecCode)
           .quantity(quantity)
+          .unit(unit)
           .build()
       );
     }

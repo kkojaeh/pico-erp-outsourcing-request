@@ -57,6 +57,7 @@ public abstract class OutsourcingRequestMaterialMapper {
       .itemId(entity.getItemId())
       .itemSpecCode(entity.getItemSpecCode())
       .quantity(entity.getQuantity())
+      .unit(entity.getUnit())
       .remark(entity.getRemark())
       .supplierId(entity.getSupplierId())
       .estimatedSupplyDate(entity.getEstimatedSupplyDate())

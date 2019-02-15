@@ -14,6 +14,7 @@ import pico.erp.process.ProcessId
 import pico.erp.process.ProcessService
 import pico.erp.project.ProjectId
 import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.data.UnitKind
 import pico.erp.user.UserId
 import pico.erp.warehouse.location.site.SiteId
 import pico.erp.warehouse.location.station.StationId
@@ -74,6 +75,8 @@ class OutsourcingRequestServiceSpec extends Specification {
 
   def itemSpecCode
 
+  def unit = UnitKind.EA
+
   @Lazy
   @Autowired
   ProcessService processService
@@ -89,6 +92,7 @@ class OutsourcingRequestServiceSpec extends Specification {
         processId: processId,
         quantity: quantity,
         spareQuantity: spareQuantity,
+        unit: unit,
         projectId: projectId,
         supplierId: supplierId,
         receiverId: receiverId,
@@ -166,6 +170,7 @@ class OutsourcingRequestServiceSpec extends Specification {
         id: id,
         quantity: quantity,
         spareQuantity: spareQuantity,
+        unit: unit,
         projectId: projectId2,
         supplierId: supplierId,
         receiverId: receiverId2,
@@ -204,6 +209,7 @@ class OutsourcingRequestServiceSpec extends Specification {
     request.processId == processId
     request.quantity == quantity
     request.spareQuantity == spareQuantity
+    request.unit == unit
     request.supplierId == supplierId
     request.receiverId == receiverId
     request.receiveSiteId == receiveSiteId

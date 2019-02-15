@@ -11,6 +11,8 @@ import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -32,6 +34,7 @@ import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.outsourcing.request.OutsourcingRequestId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
+import pico.erp.shared.data.UnitKind;
 
 @Entity(name = "OutsourcingRequestMaterial")
 @Table(name = "OSR_OUTSOURCING_REQUEST_MATERIAL", indexes = @Index(columnList = "REQUEST_ID"))
@@ -70,6 +73,10 @@ public class OutsourcingRequestMaterialEntity implements Serializable {
 
   @Column(precision = 19, scale = 2)
   BigDecimal quantity;
+
+  @Column(length = TypeDefinitions.ENUM_LENGTH)
+  @Enumerated(EnumType.STRING)
+  UnitKind unit;
 
   @Column(length = TypeDefinitions.REMARK_LENGTH)
   String remark;

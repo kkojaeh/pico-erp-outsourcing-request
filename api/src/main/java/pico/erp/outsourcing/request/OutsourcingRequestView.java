@@ -12,6 +12,7 @@ import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.ProcessId;
 import pico.erp.project.ProjectId;
+import pico.erp.shared.data.UnitKind;
 import pico.erp.user.UserId;
 import pico.erp.warehouse.location.site.SiteId;
 import pico.erp.warehouse.location.station.StationId;
@@ -32,6 +33,8 @@ public class OutsourcingRequestView {
   BigDecimal quantity;
 
   BigDecimal spareQuantity;
+
+  UnitKind unit;
 
   UserId requesterId;
 

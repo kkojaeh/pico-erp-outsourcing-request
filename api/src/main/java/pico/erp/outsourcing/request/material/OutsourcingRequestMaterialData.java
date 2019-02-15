@@ -10,6 +10,7 @@ import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.outsourcing.request.OutsourcingRequestId;
+import pico.erp.shared.data.UnitKind;
 
 @Builder
 @AllArgsConstructor
@@ -26,6 +27,8 @@ public class OutsourcingRequestMaterialData {
   ItemSpecCode itemSpecCode;
 
   BigDecimal quantity;
+
+  UnitKind unit;
 
   String remark;
 
