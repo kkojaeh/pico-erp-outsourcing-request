@@ -58,6 +58,19 @@ public interface OutsourcingRequestMaterialRequests {
     @Future
     OffsetDateTime estimatedSupplyDate;
 
+    public static CreateRequest from(OutsourcingRequestMaterialData data) {
+      return CreateRequest.builder()
+        .id(data.getId())
+        .itemId(data.getItemId())
+        .itemSpecCode(data.getItemSpecCode())
+        .quantity(data.getQuantity())
+        .unit(data.getUnit())
+        .supplierId(data.getSupplierId())
+        .remark(data.getRemark())
+        .estimatedSupplyDate(data.getEstimatedSupplyDate())
+        .build();
+    }
+
   }
 
   @Data
@@ -85,6 +98,18 @@ public interface OutsourcingRequestMaterialRequests {
 
     @Future
     OffsetDateTime estimatedSupplyDate;
+
+    public static UpdateRequest from(OutsourcingRequestMaterialData data) {
+      return UpdateRequest.builder()
+        .id(data.getId())
+        .quantity(data.getQuantity())
+        .unit(data.getUnit())
+        .supplierId(data.getSupplierId())
+        .remark(data.getRemark())
+        .estimatedSupplyDate(data.getEstimatedSupplyDate())
+        .build();
+    }
+
 
   }
 

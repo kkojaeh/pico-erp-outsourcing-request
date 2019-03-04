@@ -85,6 +85,26 @@ public interface OutsourcingRequestRequests {
     @NotNull
     UserId requesterId;
 
+    public static CreateRequest from(OutsourcingRequestData data) {
+      return CreateRequest.builder()
+        .id(data.getId())
+        .itemId(data.getItemId())
+        .itemSpecCode(data.getItemSpecCode())
+        .processId(data.getProcessId())
+        .quantity(data.getQuantity())
+        .spareQuantity(data.getSpareQuantity())
+        .unit(data.getUnit())
+        .projectId(data.getProjectId())
+        .dueDate(data.getDueDate())
+        .supplierId(data.getSupplierId())
+        .receiverId(data.getReceiverId())
+        .receiveSiteId(data.getReceiveSiteId())
+        .receiveStationId(data.getReceiveStationId())
+        .remark(data.getRemark())
+        .requesterId(data.getRequesterId())
+        .build();
+    }
+
 
   }
 
