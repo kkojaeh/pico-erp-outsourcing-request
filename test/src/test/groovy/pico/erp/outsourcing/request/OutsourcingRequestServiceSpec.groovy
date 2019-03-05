@@ -134,7 +134,8 @@ class OutsourcingRequestServiceSpec extends Specification {
   def progressRequest() {
     requestService.progress(
       new OutsourcingRequestRequests.ProgressRequest(
-        id: id
+        id: id,
+        progressedQuantity: 50
       )
     )
   }

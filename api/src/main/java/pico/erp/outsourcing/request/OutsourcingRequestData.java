@@ -36,6 +36,8 @@ public class OutsourcingRequestData {
 
   BigDecimal spareQuantity;
 
+  BigDecimal progressedQuantity;
+
   UnitKind unit;
 
   UserId requesterId;

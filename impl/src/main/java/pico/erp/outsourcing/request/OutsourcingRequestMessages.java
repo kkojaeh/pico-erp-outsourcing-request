@@ -237,6 +237,10 @@ public interface OutsourcingRequestMessages {
     @Data
     class Request {
 
+      @NotNull
+      @Min(0)
+      BigDecimal progressedQuantity;
+
     }
 
     @Value

@@ -236,6 +236,10 @@ public interface OutsourcingRequestRequests {
     @NotNull
     OutsourcingRequestId id;
 
+    @NotNull
+    @Min(0)
+    BigDecimal progressedQuantity;
+
   }
 
   @Data

@@ -85,6 +85,9 @@ public class OutsourcingRequestEntity implements Serializable {
   @Column(precision = 19, scale = 2)
   BigDecimal spareQuantity;
 
+  @Column(precision = 19, scale = 2)
+  BigDecimal progressedQuantity;
+
   @Column(length = TypeDefinitions.ENUM_LENGTH)
   @Enumerated(EnumType.STRING)
   UnitKind unit;

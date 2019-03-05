@@ -44,6 +44,7 @@ public class OutsourcingRequestQueryJpa implements OutsourcingRequestQuery {
       request.processId,
       request.quantity,
       request.spareQuantity,
+      request.progressedQuantity,
       request.unit,
       request.requesterId,
       request.accepterId,

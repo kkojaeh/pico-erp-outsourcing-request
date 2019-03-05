@@ -52,6 +52,8 @@ public class OutsourcingRequest implements Serializable {
 
   BigDecimal spareQuantity;
 
+  BigDecimal progressedQuantity;
+
   UnitKind unit;
 
   ProjectId projectId;
@@ -109,6 +111,7 @@ public class OutsourcingRequest implements Serializable {
     this.remark = request.getRemark();
     this.status = OutsourcingRequestStatusKind.DRAFT;
     this.requesterId = request.getRequesterId();
+    this.progressedQuantity = BigDecimal.ZERO;
     this.code = request.getCodeGenerator().generate(this);
     return new OutsourcingRequestMessages.Create.Response(
       Arrays.asList(new OutsourcingRequestEvents.CreatedEvent(this.id))
@@ -189,6 +192,7 @@ public class OutsourcingRequest implements Serializable {
     if (!isProgressable()) {
       throw new OutsourcingRequestExceptions.CannotProgressException();
     }
+    this.progressedQuantity = this.progressedQuantity.add(request.getProgressedQuantity());
     this.status = OutsourcingRequestStatusKind.IN_PROGRESS;
     return new OutsourcingRequestMessages.Progress.Response(
       Arrays.asList(new OutsourcingRequestEvents.ProgressedEvent(this.id))

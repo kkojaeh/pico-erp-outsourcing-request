@@ -34,6 +34,8 @@ public class OutsourcingRequestView {
 
   BigDecimal spareQuantity;
 
+  BigDecimal progressedQuantity;
+
   UnitKind unit;
 
   UserId requesterId;

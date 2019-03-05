@@ -80,7 +80,8 @@ class OutsourcingRequestMaterialServiceSpec extends Specification {
   def progressRequest() {
     requestService.progress(
       new OutsourcingRequestRequests.ProgressRequest(
-        id: requestId
+        id: requestId,
+        progressedQuantity: 50
       )
     )
   }
