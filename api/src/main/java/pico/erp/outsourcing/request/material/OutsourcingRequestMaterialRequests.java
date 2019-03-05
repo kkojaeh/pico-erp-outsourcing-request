@@ -61,6 +61,7 @@ public interface OutsourcingRequestMaterialRequests {
     public static CreateRequest from(OutsourcingRequestMaterialData data) {
       return CreateRequest.builder()
         .id(data.getId())
+        .requestId(data.getRequestId())
         .itemId(data.getItemId())
         .itemSpecCode(data.getItemSpecCode())
         .quantity(data.getQuantity())
