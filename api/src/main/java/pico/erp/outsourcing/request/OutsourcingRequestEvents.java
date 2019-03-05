@@ -1,5 +1,6 @@
 package pico.erp.outsourcing.request;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,8 @@ public interface OutsourcingRequestEvents {
     public final static String CHANNEL = "event.outsourcing-request.progressed";
 
     private OutsourcingRequestId id;
+
+    private BigDecimal progressedQuantity;
 
     public String channel() {
       return CHANNEL;

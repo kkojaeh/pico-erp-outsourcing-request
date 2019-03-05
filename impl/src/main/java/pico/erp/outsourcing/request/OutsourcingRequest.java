@@ -195,7 +195,8 @@ public class OutsourcingRequest implements Serializable {
     this.progressedQuantity = this.progressedQuantity.add(request.getProgressedQuantity());
     this.status = OutsourcingRequestStatusKind.IN_PROGRESS;
     return new OutsourcingRequestMessages.Progress.Response(
-      Arrays.asList(new OutsourcingRequestEvents.ProgressedEvent(this.id))
+      Arrays.asList(
+        new OutsourcingRequestEvents.ProgressedEvent(this.id, request.getProgressedQuantity()))
     );
   }
 
