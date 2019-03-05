@@ -32,7 +32,7 @@ public interface OutsourcingRequestEvents {
 
     private OutsourcingRequestId id;
 
-    private BigDecimal progressedQuantity;
+    private BigDecimal quantity;
 
     public String channel() {
       return CHANNEL;
