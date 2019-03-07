@@ -114,7 +114,8 @@ public class OutsourcingRequest implements Serializable {
     this.progressedQuantity = BigDecimal.ZERO;
     this.code = request.getCodeGenerator().generate(this);
     return new OutsourcingRequestMessages.Create.Response(
-      Arrays.asList(new OutsourcingRequestEvents.CreatedEvent(this.id))
+      Arrays
+        .asList(new OutsourcingRequestEvents.CreatedEvent(this.id, request.isMaterialsManually()))
     );
   }
 

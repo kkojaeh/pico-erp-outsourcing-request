@@ -84,6 +84,8 @@ public interface OutsourcingRequestMessages {
       @NotNull
       OutsourcingRequestCodeGenerator codeGenerator;
 
+      boolean materialsManually;
+
     }
 
     @Value

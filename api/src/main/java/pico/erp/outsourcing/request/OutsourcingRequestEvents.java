@@ -17,6 +17,8 @@ public interface OutsourcingRequestEvents {
 
     private OutsourcingRequestId id;
 
+    private boolean materialsManually;
+
     public String channel() {
       return CHANNEL;
     }

@@ -56,6 +56,9 @@ public class OutsourcingRequestMaterialEventListener {
     + OutsourcingRequestEvents.CreatedEvent.CHANNEL)
   public void onRequestCreated(OutsourcingRequestEvents.CreatedEvent event) {
     val requestId = event.getId();
+    if (event.isMaterialsManually()) {
+      return;
+    }
     val request = outsourcingRequestService.get(requestId);
     val processes = processService.getAll(request.getItemId());
 

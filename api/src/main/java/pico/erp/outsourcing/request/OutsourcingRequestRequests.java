@@ -85,6 +85,8 @@ public interface OutsourcingRequestRequests {
     @NotNull
     UserId requesterId;
 
+    boolean materialsManually;
+
     public static CreateRequest from(OutsourcingRequestData data) {
       return CreateRequest.builder()
         .id(data.getId())
