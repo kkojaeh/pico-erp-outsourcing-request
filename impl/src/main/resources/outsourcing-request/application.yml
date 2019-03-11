@@ -88,5 +88,5 @@ flyway:
 
 outsourcing-request:
   accepter-group:
-    id: pr-accepter
-    name: 구매요청 접수자
+    id: or-accepter
+    name: 외주요청 접수자
