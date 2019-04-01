@@ -2,7 +2,7 @@ package pico.erp.outsourcing.request;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import javax.persistence.Id;
 import lombok.AccessLevel;
@@ -12,7 +12,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import pico.erp.audit.annotation.Audit;
 import pico.erp.company.CompanyId;
 import pico.erp.item.ItemId;
 import pico.erp.item.spec.ItemSpecCode;
@@ -32,7 +31,6 @@ import pico.erp.warehouse.location.station.StationId;
 @EqualsAndHashCode(of = "id")
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Audit(alias = "outsourcing-request")
 public class OutsourcingRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -58,7 +56,7 @@ public class OutsourcingRequest implements Serializable {
 
   ProjectId projectId;
 
-  OffsetDateTime dueDate;
+  LocalDateTime dueDate;
 
   CompanyId supplierId;
 
@@ -74,15 +72,15 @@ public class OutsourcingRequest implements Serializable {
 
   UserId accepterId;
 
-  OffsetDateTime committedDate;
+  LocalDateTime committedDate;
 
-  OffsetDateTime acceptedDate;
+  LocalDateTime acceptedDate;
 
-  OffsetDateTime completedDate;
+  LocalDateTime completedDate;
 
-  OffsetDateTime rejectedDate;
+  LocalDateTime rejectedDate;
 
-  OffsetDateTime canceledDate;
+  LocalDateTime canceledDate;
 
   OutsourcingRequestStatusKind status;
 
@@ -146,7 +144,7 @@ public class OutsourcingRequest implements Serializable {
     }
     this.status = OutsourcingRequestStatusKind.ACCEPTED;
     this.accepterId = request.getAccepterId();
-    this.acceptedDate = OffsetDateTime.now();
+    this.acceptedDate = LocalDateTime.now();
     return new OutsourcingRequestMessages.Accept.Response(
       Arrays.asList(new OutsourcingRequestEvents.AcceptedEvent(this.id))
     );
@@ -158,7 +156,7 @@ public class OutsourcingRequest implements Serializable {
       throw new OutsourcingRequestExceptions.CannotCancelException();
     }
     this.status = OutsourcingRequestStatusKind.CANCELED;
-    this.canceledDate = OffsetDateTime.now();
+    this.canceledDate = LocalDateTime.now();
     return new OutsourcingRequestMessages.Cancel.Response(
       Arrays.asList(new OutsourcingRequestEvents.CanceledEvent(this.id))
     );
@@ -170,7 +168,7 @@ public class OutsourcingRequest implements Serializable {
       throw new OutsourcingRequestExceptions.CannotCompleteException();
     }
     this.status = OutsourcingRequestStatusKind.COMPLETED;
-    this.completedDate = OffsetDateTime.now();
+    this.completedDate = LocalDateTime.now();
     return new OutsourcingRequestMessages.Complete.Response(
       Arrays.asList(new OutsourcingRequestEvents.CompletedEvent(this.id))
     );
@@ -182,7 +180,7 @@ public class OutsourcingRequest implements Serializable {
       throw new OutsourcingRequestExceptions.CannotCommitException();
     }
     this.status = OutsourcingRequestStatusKind.COMMITTED;
-    this.committedDate = OffsetDateTime.now();
+    this.committedDate = LocalDateTime.now();
     return new OutsourcingRequestMessages.Commit.Response(
       Arrays.asList(new OutsourcingRequestEvents.CommittedEvent(this.id))
     );
@@ -207,7 +205,7 @@ public class OutsourcingRequest implements Serializable {
       throw new OutsourcingRequestExceptions.CannotRejectException();
     }
     this.status = OutsourcingRequestStatusKind.REJECTED;
-    this.rejectedDate = OffsetDateTime.now();
+    this.rejectedDate = LocalDateTime.now();
     this.rejectedReason = request.getRejectedReason();
     return new OutsourcingRequestMessages.Reject.Response(
       Arrays.asList(new OutsourcingRequestEvents.RejectedEvent(this.id))

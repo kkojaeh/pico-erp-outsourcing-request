@@ -1,5 +1,6 @@
 package pico.erp.outsourcing.request;
 
+import kkojaeh.spring.boot.component.Give;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,11 @@ import pico.erp.outsourcing.request.OutsourcingRequestRequests.CompleteRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.PlanRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.ProgressRequest;
 import pico.erp.outsourcing.request.OutsourcingRequestRequests.RejectRequest;
-import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
 @SuppressWarnings("Duplicates")
 @Service
-@Public
+@Give
 @Transactional
 @Validated
 public class OutsourcingRequestServiceLogic implements OutsourcingRequestService {

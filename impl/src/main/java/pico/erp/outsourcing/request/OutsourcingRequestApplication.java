@@ -1,95 +1,56 @@
 package pico.erp.outsourcing.request;
 
-import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import kkojaeh.spring.boot.component.Give;
+import kkojaeh.spring.boot.component.SpringBootComponent;
+import kkojaeh.spring.boot.component.SpringBootComponentBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import pico.erp.audit.AuditApi;
-import pico.erp.bom.BomApi;
-import pico.erp.item.ItemApi;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pico.erp.outsourcing.request.OutsourcingRequestApi.Roles;
-import pico.erp.process.ProcessApi;
-import pico.erp.project.ProjectApi;
-import pico.erp.shared.ApplicationId;
-import pico.erp.shared.ApplicationStarter;
-import pico.erp.shared.Public;
-import pico.erp.shared.SpringBootConfigs;
+import pico.erp.shared.SharedConfiguration;
 import pico.erp.shared.data.Role;
-import pico.erp.shared.impl.ApplicationImpl;
-import pico.erp.user.UserApi;
-import pico.erp.warehouse.WarehouseApi;
 
 @Slf4j
-@SpringBootConfigs
-public class OutsourcingRequestApplication implements ApplicationStarter {
-
-  public static final String CONFIG_NAME = "outsourcing-request/application";
-
-  public static final Properties DEFAULT_PROPERTIES = new Properties();
-
-  static {
-    DEFAULT_PROPERTIES.put("spring.config.name", CONFIG_NAME);
-  }
-
-  public static SpringApplication application() {
-    return new SpringApplicationBuilder(OutsourcingRequestApplication.class)
-      .properties(DEFAULT_PROPERTIES)
-      .web(false)
-      .build();
-  }
+@SpringBootComponent("outsourcing-request")
+@EntityScan
+@EnableAspectJAutoProxy
+@EnableTransactionManagement
+@EnableJpaRepositories
+@EnableJpaAuditing(auditorAwareRef = "auditorAware", dateTimeProviderRef = "dateTimeProvider")
+@SpringBootApplication
+@Import(value = {
+  SharedConfiguration.class
+})
+public class OutsourcingRequestApplication {
 
   public static void main(String[] args) {
-    application().run(args);
-  }
-
-  @Override
-  public Set<ApplicationId> getDependencies() {
-    return Stream.of(
-      UserApi.ID,
-      ItemApi.ID,
-      AuditApi.ID,
-      ProjectApi.ID,
-      WarehouseApi.ID,
-      ProcessApi.ID,
-      BomApi.ID
-    ).collect(Collectors.toSet());
-  }
-
-  @Override
-  public ApplicationId getId() {
-    return OutsourcingRequestApi.ID;
-  }
-
-  @Override
-  public boolean isWeb() {
-    return false;
+    new SpringBootComponentBuilder()
+      .component(OutsourcingRequestApplication.class)
+      .run(args);
   }
 
   @Bean
-  @Public
+  @Give
   public Role outsourcingRequestAccepter() {
     return Roles.OUTSOURCING_REQUEST_ACCEPTER;
   }
 
   @Bean
-  @Public
+  @Give
   public Role outsourcingRequestManager() {
     return Roles.OUTSOURCING_REQUEST_MANAGER;
   }
 
   @Bean
-  @Public
+  @Give
   public Role outsourcingRequester() {
     return Roles.OUTSOURCING_REQUESTER;
-  }
-
-  @Override
-  public pico.erp.shared.Application start(String... args) {
-    return new ApplicationImpl(application().run(args));
   }
 
 }

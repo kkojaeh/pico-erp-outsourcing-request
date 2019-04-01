@@ -41,12 +41,12 @@ public class OutsourcingRequestMaterialRepositoryJpa implements
 
   @Override
   public void deleteBy(OutsourcingRequestMaterialId id) {
-    repository.delete(id);
+    repository.deleteById(id);
   }
 
   @Override
   public boolean exists(OutsourcingRequestMaterialId id) {
-    return repository.exists(id);
+    return repository.existsById(id);
   }
 
   @Override
@@ -57,13 +57,13 @@ public class OutsourcingRequestMaterialRepositoryJpa implements
 
   @Override
   public Optional<OutsourcingRequestMaterial> findBy(OutsourcingRequestMaterialId id) {
-    return Optional.ofNullable(repository.findOne(id))
+    return repository.findById(id)
       .map(mapper::jpa);
   }
 
   @Override
   public void update(OutsourcingRequestMaterial material) {
-    val entity = repository.findOne(material.getId());
+    val entity = repository.findById(material.getId()).get();
     mapper.pass(mapper.jpa(material), entity);
     repository.save(entity);
   }
