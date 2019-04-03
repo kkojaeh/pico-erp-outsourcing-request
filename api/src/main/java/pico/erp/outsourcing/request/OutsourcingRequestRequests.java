@@ -1,7 +1,7 @@
 package pico.erp.outsourcing.request;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -63,7 +63,7 @@ public interface OutsourcingRequestRequests {
 
     @Future
     @NotNull
-    OffsetDateTime dueDate;
+    LocalDateTime dueDate;
 
     @Valid
     CompanyId supplierId;
@@ -137,7 +137,7 @@ public interface OutsourcingRequestRequests {
 
     @Future
     @NotNull
-    OffsetDateTime dueDate;
+    LocalDateTime dueDate;
 
     @Valid
     CompanyId supplierId;

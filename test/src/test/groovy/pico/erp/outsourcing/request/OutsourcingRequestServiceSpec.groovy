@@ -1,9 +1,8 @@
 package pico.erp.outsourcing.request
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Lazy
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
@@ -13,21 +12,21 @@ import pico.erp.item.ItemId
 import pico.erp.process.ProcessId
 import pico.erp.process.ProcessService
 import pico.erp.project.ProjectId
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier
+import pico.erp.shared.TestParentApplication
 import pico.erp.shared.data.UnitKind
 import pico.erp.user.UserId
 import pico.erp.warehouse.location.site.SiteId
 import pico.erp.warehouse.location.station.StationId
 import spock.lang.Specification
 
-import java.time.OffsetDateTime
+import java.time.LocalDateTime
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [OutsourcingRequestApplication, TestConfig])
+@SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
 @Transactional
 @Rollback
 @ActiveProfiles("test")
-@Configuration
-@ComponentScan("pico.erp.config")
 class OutsourcingRequestServiceSpec extends Specification {
 
   @Autowired
@@ -39,7 +38,7 @@ class OutsourcingRequestServiceSpec extends Specification {
 
   def projectId = ProjectId.from("sample-project1")
 
-  def dueDate = OffsetDateTime.now().plusDays(7)
+  def dueDate = LocalDateTime.now().plusDays(7)
 
   def remark = "요청 비고"
 
@@ -55,7 +54,7 @@ class OutsourcingRequestServiceSpec extends Specification {
 
   def projectId2 = ProjectId.from("sample-project2")
 
-  def dueDate2 = OffsetDateTime.now().plusDays(8)
+  def dueDate2 = LocalDateTime.now().plusDays(8)
 
   def remark2 = "요청 비고2"
 

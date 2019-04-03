@@ -2,6 +2,7 @@ package pico.erp.outsourcing.request.material;
 
 import java.math.BigDecimal;
 import java.util.Optional;
+import kkojaeh.spring.boot.component.ComponentAutowired;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -23,16 +24,13 @@ public class OutsourcingRequestMaterialEventListener {
 
   private static final String LISTENER_NAME = "listener.outsourcing-request-material-event-listener";
 
-  @Lazy
-  @Autowired
+  @ComponentAutowired
   private ProcessService processService;
 
-  @Lazy
-  @Autowired
+  @ComponentAutowired
   private BomService bomService;
 
-  @Lazy
-  @Autowired
+  @ComponentAutowired
   private BomMaterialService bomMaterialService;
 
   @Lazy
@@ -43,12 +41,10 @@ public class OutsourcingRequestMaterialEventListener {
   @Autowired
   private OutsourcingRequestMaterialService outsourcingRequestMaterialService;
 
-  @Lazy
-  @Autowired
+  @ComponentAutowired
   private ItemSpecService itemSpecService;
 
-  @Lazy
-  @Autowired
+  @ComponentAutowired
   private ItemService itemService;
 
   @EventListener

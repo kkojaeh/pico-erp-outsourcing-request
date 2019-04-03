@@ -2,6 +2,7 @@ package pico.erp.outsourcing.request.material;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import kkojaeh.spring.boot.component.ComponentBean;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,11 @@ import pico.erp.outsourcing.request.OutsourcingRequestId;
 import pico.erp.outsourcing.request.material.OutsourcingRequestMaterialRequests.CreateRequest;
 import pico.erp.outsourcing.request.material.OutsourcingRequestMaterialRequests.DeleteRequest;
 import pico.erp.outsourcing.request.material.OutsourcingRequestMaterialRequests.UpdateRequest;
-import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
 @SuppressWarnings("Duplicates")
 @Service
-@Public
+@ComponentBean
 @Transactional
 @Validated
 public class OutsourcingRequestMaterialServiceLogic implements OutsourcingRequestMaterialService {

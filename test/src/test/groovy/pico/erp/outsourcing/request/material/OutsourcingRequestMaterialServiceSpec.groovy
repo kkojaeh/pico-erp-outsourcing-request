@@ -1,28 +1,25 @@
 package pico.erp.outsourcing.request.material
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.item.ItemId
 import pico.erp.item.spec.ItemSpecCode
-import pico.erp.outsourcing.request.OutsourcingRequestId
-import pico.erp.outsourcing.request.OutsourcingRequestRequests
-import pico.erp.outsourcing.request.OutsourcingRequestService
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.outsourcing.request.*
+import pico.erp.shared.ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier
+import pico.erp.shared.TestParentApplication
 import pico.erp.shared.data.UnitKind
 import pico.erp.user.UserId
 import spock.lang.Specification
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [OutsourcingRequestApplication, TestConfig])
+@SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
 @Transactional
 @Rollback
 @ActiveProfiles("test")
-@Configuration
-@ComponentScan("pico.erp.config")
 class OutsourcingRequestMaterialServiceSpec extends Specification {
 
   @Autowired
