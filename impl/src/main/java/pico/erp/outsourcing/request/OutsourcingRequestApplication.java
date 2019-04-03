@@ -1,6 +1,6 @@
 package pico.erp.outsourcing.request;
 
-import kkojaeh.spring.boot.component.Give;
+import kkojaeh.spring.boot.component.ComponentBean;
 import kkojaeh.spring.boot.component.SpringBootComponent;
 import kkojaeh.spring.boot.component.SpringBootComponentBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pico.erp.ComponentDefinition;
 import pico.erp.outsourcing.request.OutsourcingRequestApi.Roles;
 import pico.erp.shared.SharedConfiguration;
 import pico.erp.shared.data.Role;
@@ -27,7 +28,7 @@ import pico.erp.shared.data.Role;
 @Import(value = {
   SharedConfiguration.class
 })
-public class OutsourcingRequestApplication {
+public class OutsourcingRequestApplication implements ComponentDefinition {
 
   public static void main(String[] args) {
     new SpringBootComponentBuilder()
@@ -35,20 +36,25 @@ public class OutsourcingRequestApplication {
       .run(args);
   }
 
+  @Override
+  public Class<?> getComponentClass() {
+    return OutsourcingRequestApplication.class;
+  }
+
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role outsourcingRequestAccepter() {
     return Roles.OUTSOURCING_REQUEST_ACCEPTER;
   }
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role outsourcingRequestManager() {
     return Roles.OUTSOURCING_REQUEST_MANAGER;
   }
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role outsourcingRequester() {
     return Roles.OUTSOURCING_REQUESTER;
   }
