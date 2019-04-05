@@ -1,7 +1,7 @@
 package pico.erp.outsourcing.request.material;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,7 +34,7 @@ public class OutsourcingRequestMaterialData {
 
   CompanyId supplierId;
 
-  LocalDateTime estimatedSupplyDate;
+  OffsetDateTime estimatedSupplyDate;
 
 
 }

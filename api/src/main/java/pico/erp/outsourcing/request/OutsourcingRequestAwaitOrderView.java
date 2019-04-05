@@ -1,7 +1,7 @@
 package pico.erp.outsourcing.request;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,13 +45,13 @@ public class OutsourcingRequestAwaitOrderView {
 
   StationId receiveStationId;
 
-  LocalDateTime committedDate;
+  OffsetDateTime committedDate;
 
-  LocalDateTime acceptedDate;
+  OffsetDateTime acceptedDate;
 
-  LocalDateTime dueDate;
+  OffsetDateTime dueDate;
 
-  LocalDateTime createdDate;
+  OffsetDateTime createdDate;
 
 
   @Data
@@ -68,9 +68,9 @@ public class OutsourcingRequestAwaitOrderView {
 
     ItemId itemId;
 
-    LocalDateTime startDueDate;
+    OffsetDateTime startDueDate;
 
-    LocalDateTime endDueDate;
+    OffsetDateTime endDueDate;
 
   }
 

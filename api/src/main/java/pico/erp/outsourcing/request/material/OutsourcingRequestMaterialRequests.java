@@ -1,7 +1,7 @@
 package pico.erp.outsourcing.request.material;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -56,7 +56,7 @@ public interface OutsourcingRequestMaterialRequests {
     CompanyId supplierId;
 
     @Future
-    LocalDateTime estimatedSupplyDate;
+    OffsetDateTime estimatedSupplyDate;
 
     public static CreateRequest from(OutsourcingRequestMaterialData data) {
       return CreateRequest.builder()
@@ -98,7 +98,7 @@ public interface OutsourcingRequestMaterialRequests {
     CompanyId supplierId;
 
     @Future
-    LocalDateTime estimatedSupplyDate;
+    OffsetDateTime estimatedSupplyDate;
 
     public static UpdateRequest from(OutsourcingRequestMaterialData data) {
       return UpdateRequest.builder()

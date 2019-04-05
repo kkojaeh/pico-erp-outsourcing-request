@@ -1,6 +1,6 @@
 package pico.erp.outsourcing.request;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ interface OutsourcingRequestEntityRepository extends
   CrudRepository<OutsourcingRequestEntity, OutsourcingRequestId> {
 
   @Query("SELECT COUNT(r) FROM OutsourcingRequest r WHERE r.createdDate >= :begin AND r.createdDate <= :end")
-  long countCreatedBetween(@Param("begin") LocalDateTime begin, @Param("end") LocalDateTime end);
+  long countCreatedBetween(@Param("begin") OffsetDateTime begin, @Param("end") OffsetDateTime end);
 
 }
 
@@ -30,7 +30,7 @@ public class OutsourcingRequestRepositoryJpa implements OutsourcingRequestReposi
   private OutsourcingRequestMapper mapper;
 
   @Override
-  public long countCreatedBetween(LocalDateTime begin, LocalDateTime end) {
+  public long countCreatedBetween(OffsetDateTime begin, OffsetDateTime end) {
     return repository.countCreatedBetween(begin, end);
   }
 
